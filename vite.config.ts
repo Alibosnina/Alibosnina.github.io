@@ -4,7 +4,7 @@ import path from "path";
 
 const repoName = '/Alibosnina'
 export default defineConfig(({ mode }) => ({
-    base: mode === 'production' ? repoName : '/',
+  base: mode === 'production' ? repoName : '/',
   server: {
     host: "::",
     port: 8080,
