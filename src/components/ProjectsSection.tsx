@@ -1,26 +1,38 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Github } from "lucide-react";
+import { title } from "process";
 
 const projects = [
   {
-    title: "Algorithm Visualizer",
-    description: "Interactive visualization of common CS algorithms",
-    tags: ["React", "TypeScript", "Algorithms"],
-    github: "#"
+    title: "Flappy Bird",
+    description: "A clone of the classic Flappy Bird game",
+    tags: ["React", "TypeScript", "Game"],
+    github: "https://github.com/Alibosnina/flappybird"
   },
   {
-    title: "Database Systems Project",
-    description: "Implementation of advanced database concepts",
-    tags: ["C++", "SQL", "Systems"],
-    github: "#"
+    title: "citylife-sim Project",
+    description: "A simulation game project",
+    tags: ["React", "TypeScript", "Node.js"],
+    github: "https://github.com/Alibosnina/citylife-sim"
   },
   {
     title: "Machine Learning Research",
     description: "Research project on neural networks",
     tags: ["Python", "TensorFlow", "ML"],
     github: "#"
-  }
+  },
+  {
+    title: "Portfolio Website",
+    description: "My personal portfolio website",
+    tags: ["React", "Next.js", "Tailwind CSS"],
+    github: "https://github.com/Alibosnina/Alibosnina"
+   },
+   {
+    title: "E-Mensa",
+    description: "A web application for managing a university cafeteria",
+    tags: ["PHP", "Laravel", "MariaDB"],
+   }
 ];
 
 const ProjectsSection = () => {
