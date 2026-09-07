@@ -1,16 +1,1312 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ali Busneina</title>
-    <meta name="description" content="Portfolio page" />
-    <meta name="author" content="Ali" />
-    <script type="module" crossorigin src="/assets/index-BXhlBAfd.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CbhWPfQ9.css">
-  </head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ali Busneina — full-stack developer and Informatik student at FH Aachen. NestJS, Next.js, PostgreSQL. Available for working-student, internship and junior full-stack roles.">
+<meta property="og:title" content="Ali Busneina — Full-stack developer">
+<meta property="og:description" content="Full-stack developer and Informatik student at FH Aachen. Logistics platforms, double-entry accounting, FHIR health records.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://alibosnina.github.io/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%2315181A%22/><text y=%22.9em%22 x=%2250%22 text-anchor=%22middle%22 font-size=%2270%22 font-family=%22Helvetica,Arial%22 font-weight=%22bold%22 fill=%22%23E4A44A%22>A</text></svg>">
+<style>:root{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Ali Busneina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:opsz,wght@6..72,300..600&display=swap">
 
-  <body>
-    <div id="root"></div>
-  </body>
+<style>
+/* ---------------------------------------------------------------
+   Tokens — complete light palette on bare :root, redefined twice.
+   Neutrals carry a faint green-grey bias; accent is a signal ochre.
+------------------------------------------------------------------ */
+:root {
+  --paper:      #E9EBE6;
+  --surface:    #F4F5F1;
+  --surface-2:  #DEE1DA;
+  --ink:        #15181A;
+  --ink-2:      #4E555A;
+  --ink-3:      #7B8286;
+  --rule:       #C6CAC1;
+  --rule-soft:  #D6D9D1;
+  --accent:     #96590A;
+  --accent-hi:  #B36C0C;
+  --accent-wash:#EADFC9;
+  --focus:      #1F5FBF;
+
+  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-prose:   "Newsreader", Georgia, "Times New Roman", serif;
+  --f-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --shell: 1200px;
+  --rail: 172px;
+  --col: 190px;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:      #101312;
+    --surface:    #171B19;
+    --surface-2:  #1F2422;
+    --ink:        #E7EAE4;
+    --ink-2:      #A0A8A3;
+    --ink-3:      #767E79;
+    --rule:       #2B312E;
+    --rule-soft:  #232827;
+    --accent:     #E4A44A;
+    --accent-hi:  #F2BC6E;
+    --accent-wash:#2E2618;
+    --focus:      #7FB2FF;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper:      #101312;
+  --surface:    #171B19;
+  --surface-2:  #1F2422;
+  --ink:        #E7EAE4;
+  --ink-2:      #A0A8A3;
+  --ink-3:      #767E79;
+  --rule:       #2B312E;
+  --rule-soft:  #232827;
+  --accent:     #E4A44A;
+  --accent-hi:  #F2BC6E;
+  --accent-wash:#2E2618;
+  --focus:      #7FB2FF;
+  color-scheme: dark;
+}
+
+/* ---------------------------------------------------------------
+   Base
+------------------------------------------------------------------ */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-display);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.lab {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.prose {
+  font-family: var(--f-prose);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  color: var(--ink-2);
+  max-width: 62ch;
+  margin: 0;
+}
+
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------------------------------------------------------------
+   Shell + rail
+------------------------------------------------------------------ */
+.shell {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 0 28px 0;
+  display: grid;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  gap: 0 48px;
+  align-items: start;
+}
+
+.rail {
+  position: sticky;
+  top: 0;
+  padding: 42px 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  border-right: 1px solid var(--rule-soft);
+  margin-right: -24px;
+  padding-right: 24px;
+  min-height: 100vh;
+}
+
+.rail-mark {
+  font-family: var(--f-display);
+  font-variation-settings: "wdth" 118, "wght" 800;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+.rail-mark span { display: block; color: var(--ink-3); }
+
+.rail-nav { display: flex; flex-direction: column; gap: 2px; }
+
+.rail-nav a {
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-decoration: none;
+  padding: 5px 0 5px 14px;
+  border-left: 1px solid transparent;
+  transition: color .18s ease, border-color .18s ease;
+}
+.rail-nav a:hover { color: var(--accent); border-left-color: var(--accent); }
+
+.rail-foot { margin-top: auto; display: flex; flex-direction: column; gap: 7px; }
+.rail-foot a {
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 3px;
+  width: fit-content;
+  transition: color .18s ease, border-color .18s ease;
+}
+.rail-foot a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+.main { padding: 42px 0 0; min-width: 0; }
+
+/* ---------------------------------------------------------------
+   Availability strip
+------------------------------------------------------------------ */
+.avail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: fit-content;
+  max-width: 100%;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+}
+.avail-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px;
+  border-left: 1px solid var(--rule);
+  min-width: 0;
+}
+.avail-cell:first-child {
+  border-left: 0;
+  background: var(--accent-wash);
+}
+.avail-k {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.avail-v {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.avail-cell:first-child .avail-v {
+  color: var(--accent);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 11px;
+}
+
+.pulse {
+  position: relative;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+}
+.pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: ping 2.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes ping {
+  0%   { transform: scale(1);   opacity: 0.5; }
+  70%  { transform: scale(3.2); opacity: 0; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pulse::after { display: none; }
+}
+
+/* ---------------------------------------------------------------
+   Hero
+------------------------------------------------------------------ */
+.hero { padding-bottom: 54px; }
+
+.hero h1 {
+  font-variation-settings: "wdth" 112, "wght" 800;
+  font-size: clamp(3.1rem, 11.5vw, 7.5rem);
+  line-height: 0.87;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  margin: 24px 0 0;
+  text-wrap: balance;
+}
+.hero h1 em { display: block; font-style: normal; color: var(--ink); }
+.hero h1 .thin { font-variation-settings: "wdth" 108, "wght" 300; color: var(--ink-3); }
+
+.hero-role {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 16px;
+  margin: 24px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--f-mono);
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: var(--ink-2);
+}
+.hero-role b { color: var(--ink); font-weight: 500; }
+.hero-role .sep { color: var(--rule); }
+
+.hero-lede { margin-top: 26px; font-size: 1.15rem; max-width: 60ch; }
+
+.hero-grid {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
+  gap: 1px;
+  background: var(--rule-soft);
+  border: 1px solid var(--rule-soft);
+}
+.spec { background: var(--paper); padding: 15px 16px 16px; display: flex; flex-direction: column; gap: 6px; }
+.spec-v { font-family: var(--f-mono); font-size: 12.5px; line-height: 1.45; color: var(--ink); }
+.spec-v small { display: block; color: var(--ink-3); font-size: 11.5px; }
+
+.hero-cta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
+
+.btn {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 11px 17px;
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  background: var(--surface);
+  transition: border-color .18s ease, color .18s ease, background .18s ease;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.btn.solid:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+:root[data-theme="dark"] .btn.solid:hover { color: #17130A; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .btn.solid:hover { color: #17130A; }
+}
+
+/* ---------------------------------------------------------------
+   Sections
+------------------------------------------------------------------ */
+.sec { padding: 46px 0 8px; scroll-margin-top: 24px; border-top: 2px solid var(--ink); }
+
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 0 26px;
+  flex-wrap: wrap;
+}
+.sec-head h2 {
+  font-variation-settings: "wdth" 100, "wght" 700;
+  font-size: 1.02rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: var(--col) minmax(0, 1fr);
+  gap: 4px 34px;
+  padding: 24px 0 28px;
+  border-top: 1px solid var(--rule-soft);
+}
+.entry:first-of-type { border-top: 1px solid var(--rule); }
+
+.entry-meta { display: flex; flex-direction: column; gap: 8px; padding-top: 3px; }
+.entry-date {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.entry-kind {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  width: fit-content;
+}
+.entry-kind.muted { color: var(--ink-3); }
+
+.entry-body { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+
+.entry-title {
+  font-variation-settings: "wdth" 104, "wght" 700;
+  font-size: 1.4rem;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+  margin: 0;
+  text-wrap: balance;
+}
+.entry-sub { font-family: var(--f-mono); font-size: 12.5px; color: var(--ink-2); margin: -4px 0 0; }
+
+.bullets { margin: 2px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; max-width: 66ch; }
+.bullets li {
+  font-family: var(--f-prose);
+  font-size: 1.0125rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+  padding-left: 18px;
+  position: relative;
+}
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.62em;
+  width: 7px; height: 1px;
+  background: var(--accent);
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; padding: 0; list-style: none; }
+.chips li {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+  border: 1px solid var(--rule);
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+.links { display: flex; flex-wrap: wrap; gap: 5px 20px; margin-top: 4px; }
+.link-out {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-wash);
+  padding-bottom: 2px;
+  transition: border-color .18s ease, color .18s ease;
+}
+.link-out:hover { border-bottom-color: var(--accent); color: var(--accent-hi); }
+.link-none { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); }
+
+.entry.flagship .entry-body {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  padding: 20px 22px 22px;
+}
+
+.group { display: flex; align-items: center; gap: 14px; padding: 32px 0 4px; }
+.group .lab { white-space: nowrap; color: var(--ink); }
+.group .line { height: 1px; background: var(--rule-soft); flex: 1; }
+.group:first-child { padding-top: 0; }
+
+.also {
+  border-top: 1px solid var(--rule-soft);
+  padding: 22px 0 4px;
+  display: grid;
+  grid-template-columns: var(--col) minmax(0, 1fr);
+  gap: 10px 34px;
+}
+.also-list { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; list-style: none; }
+.also-list li {
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  color: var(--ink-2);
+  border: 1px dashed var(--rule);
+  padding: 4px 9px;
+}
+
+/* ---------------------------------------------------------------
+   Toolkit
+------------------------------------------------------------------ */
+.kit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1px;
+  background: var(--rule-soft);
+  border: 1px solid var(--rule-soft);
+}
+.kit-col { background: var(--paper); padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 11px; }
+.kit-col ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.kit-col li { font-family: var(--f-mono); font-size: 12.5px; color: var(--ink-2); }
+
+/* ---------------------------------------------------------------
+   Contact + QR
+------------------------------------------------------------------ */
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 268px;
+  gap: 40px;
+  align-items: start;
+  padding-bottom: 10px;
+}
+
+.rows { display: flex; flex-direction: column; }
+.row {
+  display: grid;
+  grid-template-columns: 122px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-top: 1px solid var(--rule-soft);
+}
+.row:first-child { border-top: 1px solid var(--rule); }
+.row a, .row span.val {
+  font-family: var(--f-mono);
+  font-size: 13.5px;
+  color: var(--ink);
+  text-decoration: none;
+  word-break: break-word;
+}
+.row a { border-bottom: 1px solid var(--rule); padding-bottom: 2px; transition: color .18s ease, border-color .18s ease; }
+.row a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.row .todo { color: var(--ink-3); font-size: 11.5px; font-family: var(--f-mono); }
+
+.qr-card {
+  background: #FBFBF8;
+  border: 1px solid var(--rule);
+  padding: 20px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 1px 0 var(--rule-soft), 0 14px 34px -22px rgba(10,14,12,.55);
+}
+.qr-frame { background: #FFFFFF; border: 1px solid #E2E4DD; padding: 12px; display: grid; place-items: center; }
+.qr-frame svg { display: block; width: 100%; height: auto; max-width: 200px; }
+.qr-meta { display: flex; flex-direction: column; gap: 4px; }
+.qr-name {
+  font-variation-settings: "wdth" 112, "wght" 800;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #15181A;
+}
+.qr-sub { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #6C7370; }
+.qr-url { font-family: var(--f-mono); font-size: 10.5px; color: #96590A; word-break: break-all; }
+
+/* ---------------------------------------------------------------
+   Footer
+------------------------------------------------------------------ */
+.foot {
+  margin-top: 54px;
+  border-top: 2px solid var(--ink);
+  padding: 18px 0 46px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.foot .lab { color: var(--ink-3); }
+
+.theme-btn {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--ink-3);
+  border: 1px solid var(--rule);
+  padding: 6px 10px;
+  cursor: pointer;
+  width: fit-content;
+  transition: color .18s ease, border-color .18s ease;
+}
+.theme-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ---------------------------------------------------------------
+   Responsive
+------------------------------------------------------------------ */
+@media (max-width: 1080px) {
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail {
+    position: sticky; top: 0; z-index: 20;
+    min-height: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 18px;
+    padding: 12px 0;
+    margin-right: 0;
+    padding-right: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+    overflow-x: auto;
+  }
+  .rail-mark { font-size: 13px; white-space: nowrap; }
+  .rail-mark span { display: inline; color: var(--ink-3); }
+  .rail-nav { flex-direction: row; gap: 14px; }
+  .rail-nav a { padding: 2px 0; border-left: 0; white-space: nowrap; }
+  .rail-nav a:hover { border-left: 0; }
+  .rail-foot { display: none; }
+  .main { padding-top: 30px; }
+}
+
+@media (max-width: 760px) {
+  .shell { padding: 0 18px; }
+  .entry, .also { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .entry-meta { flex-direction: row; align-items: center; gap: 12px; }
+  .contact { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .qr-card { max-width: 300px; }
+  .row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .hero h1 { line-height: 0.92; }
+  .avail { width: 100%; }
+  .avail-cell { border-left: 0; border-top: 1px solid var(--rule); flex: 1 1 100%; }
+  .avail-cell:first-child { border-top: 0; }
+}
+</style>
+
+<div class="shell">
+
+  <!-- ============ RAIL ============ -->
+  <nav class="rail" aria-label="Section navigation">
+    <div class="rail-mark">Ali<br>Busneina<span>Aachen, DE</span></div>
+    <div class="rail-nav">
+      <a href="#profile">Profile</a>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#toolkit">Toolkit</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="rail-foot">
+      <a href="https://github.com/Alibosnina" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:alibusneina@gmail.com">Email</a>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour theme">Theme</button>
+    </div>
+  </nav>
+
+  <main class="main">
+
+    <!-- ============ HERO ============ -->
+    <header class="hero">
+      <div class="avail">
+        <div class="avail-cell">
+          <span class="pulse" aria-hidden="true"></span>
+          <span class="avail-v">Available now</span>
+        </div>
+        <div class="avail-cell">
+          <span class="avail-k">Looking for</span>
+          <span class="avail-v">Working student &middot; Internship &middot; Junior full-stack</span>
+        </div>
+        <div class="avail-cell">
+          <span class="avail-k">Where</span>
+          <span class="avail-v">Aachen &amp; remote</span>
+        </div>
+      </div>
+
+      <h1><em>Ali</em><em class="thin">Busneina</em></h1>
+
+      <div class="hero-role">
+        <b>Full-stack developer</b>
+        <span class="sep">/</span>
+        <span>B.Sc. Informatik, FH Aachen</span>
+        <span class="sep">/</span>
+        <span class="num">2023 — present</span>
+      </div>
+
+      <p class="prose hero-lede">
+        I build production systems end to end — NestJS APIs, Next.js and React front ends,
+        PostgreSQL underneath, shipped on Docker. Logistics platforms, double-entry accounting,
+        an electronic health record, bilingual Arabic/English interfaces with full RTL.
+      </p>
+
+      <div class="hero-grid">
+        <div class="spec">
+          <span class="lab">Focus</span>
+          <span class="spec-v">Full-stack web<small>Next.js &middot; NestJS &middot; TypeScript</small></span>
+        </div>
+        <div class="spec">
+          <span class="lab">Studying</span>
+          <span class="spec-v">B.Sc. Informatik<small>FH Aachen, since 2023</small></span>
+        </div>
+        <div class="spec">
+          <span class="lab">Previously</span>
+          <span class="spec-v">Werkstudent<small>Snacc-it GmbH</small></span>
+        </div>
+        <div class="spec">
+          <span class="lab">Based in</span>
+          <span class="spec-v">Aachen<small>North Rhine-Westphalia, DE</small></span>
+        </div>
+      </div>
+
+      <div class="hero-cta">
+        <a class="btn solid" href="#work">See the work</a>
+        <a class="btn" href="mailto:alibusneina@gmail.com">alibusneina@gmail.com</a>
+        <a class="btn" href="https://github.com/Alibosnina" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </header>
+
+    <!-- ============ PROFILE ============ -->
+    <section class="sec" id="profile">
+      <div class="sec-head">
+        <h2>Profile</h2>
+        <span class="lab">Who I am</span>
+      </div>
+      <p class="prose">
+        I&rsquo;m a computer science student at FH Aachen, and most of what I know I learned by building
+        systems that had to actually work. A freight platform moving goods between Europe and Libya. An
+        IFRS-compatible construction ledger. A national electronic health record built on FHIR. Each one
+        started as an empty repository and ended as something deployed, documented and running.
+      </p>
+      <p class="prose" style="margin-top:14px">
+        The pattern across all of them is the same stack and the same discipline: a NestJS API over
+        PostgreSQL, a Next.js or React front end, Docker for everything underneath, and a permission model
+        thought through before the first screen gets built. Several are bilingual English/Arabic with
+        right-to-left layouts throughout. Alongside that I worked as a Werkstudent at Snacc-it GmbH, tutored
+        first-year programming at FH Aachen, and ran IT operations for a small company for two years.
+      </p>
+    </section>
+
+    <!-- ============ WORK ============ -->
+    <section class="sec" id="work">
+      <div class="sec-head">
+        <h2>Selected work</h2>
+        <span class="lab">Platforms, systems &amp; interfaces</span>
+      </div>
+
+      <div class="group"><span class="lab">Platforms &amp; systems</span><span class="line"></span></div>
+
+      <article class="entry flagship">
+        <div class="entry-meta">
+          <span class="entry-kind">Logistics</span>
+          <span class="entry-date num">2025 &ndash; 2026</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">Fox Line Logistics</h3>
+          <p class="entry-sub">Freight platform &middot; Europe &harr; Libya</p>
+          <p class="prose">
+            An end-to-end shipping platform covering the whole journey: customer shipment intake, warehouse
+            operations, consolidation and routing, customs paperwork, delivery and tracking — with a full
+            double-entry accounting back office behind it. The ledger is genuine bookkeeping: a chart of
+            accounts, journal entries whose lines must balance, monthly periods that lock once closed, and
+            cost centres attributing activity to a warehouse, shipment, client or department. Balances are
+            never adjusted directly; you post an entry.
+          </p>
+          <p class="prose">
+            Built as an npm-workspaces monorepo — one NestJS API and two Next.js front ends (a staff
+            dashboard for operations, CRM and finance, and a customer portal with public tracking) — sharing
+            a UI package and a typed contract of enums, DTOs and permission codes. Access is governed by an
+            attribute-based permission model, and the whole system is documented down to the database and
+            deployment level.
+          </p>
+          <ul class="chips">
+            <li>NestJS 11</li><li>Next.js</li><li>TypeORM</li><li>PostgreSQL</li><li>Redis</li>
+            <li>Docker</li><li>Monorepo</li><li>ABAC</li><li>Double-entry accounting</li>
+          </ul>
+          <div class="links"><span class="link-none">Private repository</span></div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind">Accounting</span>
+          <span class="entry-date num">2026</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">Mumtaz Ledger</h3>
+          <p class="entry-sub">Enterprise construction accounting</p>
+          <p class="prose">
+            An audit-proof, IFRS-compatible accounting system for construction, designed to scale across
+            multiple countries. The data model is deliberately strict: a Company &rarr; Legal Entity &rarr;
+            Location hierarchy, hierarchical general-ledger accounts carrying English, Arabic and Turkish
+            labels, cost centres, and projects bound to legal entities.
+          </p>
+          <p class="prose">
+            NestJS and Next.js in a monorepo over PostgreSQL with Prisma, identity handled by a
+            self-hosted Keycloak, and a Material UI dashboard. Deployed to a VPS behind Caddy with automatic
+            Let&rsquo;s Encrypt certificates, HTTP/3 and enforced HTTPS.
+          </p>
+          <ul class="chips">
+            <li>NestJS</li><li>Next.js</li><li>Prisma</li><li>PostgreSQL</li><li>Keycloak</li>
+            <li>MUI</li><li>Docker</li><li>Caddy</li><li>IFRS</li>
+          </ul>
+          <div class="links">
+            <a class="link-out" href="https://5c.com.ly" target="_blank" rel="noopener">5c.com.ly &nearr;</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind">Healthcare</span>
+          <span class="entry-date num">2026</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">Sijil EHR</h3>
+          <p class="entry-sub">&#1587;&#1616;&#1580;&#1616;&#1604; &middot; national electronic health record, MVP</p>
+          <p class="prose">
+            A web-first electronic health record built on FHIR, proving the full clinical stack end to end:
+            clinician sign-in with MFA, patient search, a patient timeline, and writing a SOAP note — with
+            every single access to patient health information recorded server-side in an audit log.
+          </p>
+          <p class="prose">
+            FHIR server, identity and auditing come from a self-hosted Medplum running in Docker alongside
+            PostgreSQL and Redis; the clinician app is React and TypeScript with Mantine, built Arabic-first
+            with right-to-left layout throughout.
+          </p>
+          <ul class="chips">
+            <li>FHIR</li><li>Medplum</li><li>Node.js</li><li>TypeScript</li><li>React</li>
+            <li>Mantine</li><li>PostgreSQL</li><li>Docker</li><li>Arabic RTL</li>
+          </ul>
+          <div class="links"><span class="link-none">Private repository</span></div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind">Maritime</span>
+          <span class="entry-date num">2025 &ndash; 2026</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">Almasar</h3>
+          <p class="entry-sub">Shipping agency management system</p>
+          <p class="prose">
+            An internal system for a shipping agency handling vessel port calls: a live port-call dashboard,
+            vessel nominations, a PDA generator that costs and produces proforma disbursement accounts, FDA
+            generation with receipt uploads, a Statement of Facts timeline editor, crew changes and CTM
+            arrangements, invoicing, and a searchable archive of historical documents.
+          </p>
+          <ul class="chips">
+            <li>React 18</li><li>TypeScript</li><li>Vite</li><li>NestJS</li><li>Prisma</li>
+            <li>PostgreSQL</li><li>Radix UI</li><li>Docker Compose</li>
+          </ul>
+          <div class="links"><span class="link-none">Private repository</span></div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind">Education</span>
+          <span class="entry-date num">2025 &ndash; 2026</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">Knowledge First</h3>
+          <p class="entry-sub">Language-learning platform</p>
+          <p class="prose">
+            A language school platform running in production: prospective students apply online, sit a
+            placement test that routes them to the right level, and staff manage the whole pipeline from an
+            admin back office — with transactional email templates for each step.
+          </p>
+          <p class="prose">
+            A React, Vite and TypeScript front end on continuous deployment from <code>main</code>, backed by
+            a NestJS API over PostgreSQL, with the backend running under PM2 on its own server.
+          </p>
+          <ul class="chips">
+            <li>React</li><li>Vite</li><li>TypeScript</li><li>Tailwind CSS</li><li>NestJS</li>
+            <li>PostgreSQL</li><li>Docker</li><li>CI/CD</li>
+          </ul>
+          <div class="links">
+            <a class="link-out" href="https://knowledge-first.co.uk" target="_blank" rel="noopener">knowledge-first.co.uk &nearr;</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind">Construction</span>
+          <span class="entry-date num">2026</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">ClearSite</h3>
+          <p class="entry-sub">Real-time production management for underground construction</p>
+          <p class="prose">
+            A local-first site management tool: crews record production on site, offline if they have to, and
+            the app reconciles when it reconnects. Trilingual from the start — English, Arabic with RTL, and
+            Turkish — and installable as a PWA.
+          </p>
+          <p class="prose">
+            React and TypeScript with Zustand and TanStack Query for state and data, over a self-hosted
+            Supabase stack (Postgres, GoTrue, PostgREST, Realtime and Storage) behind Caddy.
+          </p>
+          <ul class="chips">
+            <li>React</li><li>TypeScript</li><li>Zustand</li><li>TanStack Query</li>
+            <li>Supabase</li><li>PWA</li><li>i18n / RTL</li><li>Caddy</li>
+          </ul>
+          <div class="links">
+            <a class="link-out" href="https://clear-site-zeta.vercel.app" target="_blank" rel="noopener">Live preview &nearr;</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind">Retail &amp; FX</span>
+          <span class="entry-date num">2026</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">Lux</h3>
+          <p class="entry-sub">Personal-shopping business system</p>
+          <p class="prose">
+            An internal system for a business that buys beauty, makeup, perfume and luxury goods abroad and
+            delivers them to customers in Libya. It has to handle three jobs at once — retail buying, freight
+            forwarding, and currency trading, because stock is bought in EUR, USD and TRY and sold in LYD.
+            Built in phases, starting with the spine: customers, orders and items, with money, FX and
+            logistics layered on after.
+          </p>
+          <ul class="chips">
+            <li>TypeScript</li><li>Multi-currency</li><li>Domain modelling</li><li>Phased delivery</li>
+          </ul>
+          <div class="links"><span class="link-none">Private repository</span></div>
+        </div>
+      </article>
+
+      <div class="group"><span class="lab">Websites &amp; interfaces</span><span class="line"></span></div>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind muted">Institutional</span>
+          <span class="entry-date num">2026</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">LUKA &mdash; Libya UK Alliance</h3>
+          <p class="entry-sub">Diplomatic organisation website</p>
+          <p class="prose">
+            A website built to a written design and build specification, with the craft in the detail: a
+            design-token system (colour, type scale, spacing, motion) defined as CSS custom properties and
+            wired through the Tailwind theme, a parchment grain overlay generated with inline SVG turbulence,
+            self-hosted licensed typography, and a choreographed page-load curtain that sweeps, splits and
+            reveals. Reduced-motion preferences are honoured globally.
+          </p>
+          <ul class="chips">
+            <li>Next.js 14</li><li>React 18</li><li>TypeScript</li><li>Tailwind CSS</li>
+            <li>GSAP</li><li>Framer Motion</li><li>Design tokens</li>
+          </ul>
+          <div class="links"><span class="link-none">Private repository</span></div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind muted">Marketing site</span>
+          <span class="entry-date num">2026</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">Darahim</h3>
+          <p class="entry-sub">&#1583;&#1585;&#1575;&#1607;&#1605; &middot; bilingual site for an IT consultancy</p>
+          <p class="prose">
+            A fully bilingual English/Arabic marketing site with genuine right-to-left support — not a
+            mirrored afterthought — carrying the company&rsquo;s brand identity and self-hosted typography.
+            Next.js App Router on Turbopack with Tailwind v4 and Framer Motion, shipped with its own design
+            system package and contributor documentation.
+          </p>
+          <ul class="chips">
+            <li>Next.js App Router</li><li>Tailwind v4</li><li>Framer Motion</li>
+            <li>Arabic RTL</li><li>Design system</li><li>Jest</li>
+          </ul>
+          <div class="links">
+            <a class="link-out" href="https://darahim-new-alibosninas-projects.vercel.app" target="_blank" rel="noopener">Live preview &nearr;</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind muted">Marketing site</span>
+          <span class="entry-date num">2026</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">Madwin General Contractor</h3>
+          <p class="entry-sub">Bilingual site for a Benghazi contractor</p>
+          <p class="prose">
+            A bilingual English/Arabic marketing site built without a backend at all: the whole thing is
+            prerendered to static files at build time from an SSR bundle, so it deploys anywhere and stays
+            fast with nothing running behind it.
+          </p>
+          <ul class="chips">
+            <li>TypeScript</li><li>SSR + prerender</li><li>Static output</li><li>Arabic RTL</li>
+          </ul>
+          <div class="links"><span class="link-none">Private repository</span></div>
+        </div>
+      </article>
+
+      <div class="group"><span class="lab">Snacc-it GmbH &mdash; working student</span><span class="line"></span></div>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind muted">Company website</span>
+          <span class="entry-date num">2025 &ndash; 2026</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">snacc-it &mdash; company website</h3>
+          <p class="entry-sub">Sole developer, concept to launch</p>
+          <p class="prose">
+            The public website for a ServiceNow consultancy, taken from an empty repository to production on
+            my own: information architecture, page design, implementation and deployment.
+          </p>
+          <ul class="chips"><li>Next.js</li><li>TypeScript</li><li>React</li><li>Deployment</li></ul>
+          <div class="links">
+            <a class="link-out" href="https://snacc-it.de" target="_blank" rel="noopener">snacc-it.de &nearr;</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind muted">Platform work</span>
+          <span class="entry-date num">2025 &ndash; 2026</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">ServiceNow configuration &amp; development</h3>
+          <p class="entry-sub">For the consultancy&rsquo;s enterprise customers</p>
+          <p class="prose">
+            Configuring and extending ServiceNow instances inside an agile delivery team — turning customer
+            requirements into implemented, tested changes on the platform.
+          </p>
+          <ul class="chips"><li>ServiceNow</li><li>JavaScript</li><li>Requirements analysis</li><li>Testing</li></ul>
+          <div class="links"><span class="link-none">Not public</span></div>
+        </div>
+      </article>
+
+      <div class="group"><span class="lab">University &mdash; fundamentals in C++ and Python</span><span class="line"></span></div>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind muted">University</span>
+          <span class="entry-date num">2024 &ndash; 2025</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">Algorithms &amp; data structures in C++</h3>
+          <p class="entry-sub">ADS-Prak &middot; six practicals, built from scratch</p>
+          <p class="prose">
+            Core data structures and algorithms implemented by hand and covered by Catch2 unit tests: a
+            circular linked list, binary trees, a hash table, and the comparison sorts — quicksort, mergesort,
+            heapsort and shellsort — each benchmarked across input sizes, with the measured runtimes exported
+            and plotted in MATLAB.
+          </p>
+          <ul class="chips"><li>C++</li><li>Catch2</li><li>Unit testing</li><li>Benchmarking</li><li>MATLAB</li></ul>
+          <div class="links">
+            <a class="link-out" href="https://github.com/Alibosnina/ADS-Prak" target="_blank" rel="noopener">Source on GitHub &nearr;</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind muted">University</span>
+          <span class="entry-date num">2024</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">SAP OAuth integration</h3>
+          <p class="entry-sub">Authentication against SAP platform APIs</p>
+          <p class="prose">
+            A project on authentication concepts for the SAP platform: working through the OAuth flow, the
+            token exchange around it, and what it takes to call SAP&rsquo;s APIs as an authorised client.
+          </p>
+          <ul class="chips"><li>OAuth 2.0</li><li>SAP Platform APIs</li><li>Python</li></ul>
+          <div class="links"><span class="link-none">Coursework &mdash; not public</span></div>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta">
+          <span class="entry-kind muted">University</span>
+          <span class="entry-date num">2024</span>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">Programming foundations &amp; higher mathematics in C++</h3>
+          <p class="entry-sub">GIP-Prak and HOMA2 &middot; the module I went on to tutor</p>
+          <p class="prose">
+            Practical assignments from Grundlagen der Informatik und Programmierung — the same module I was
+            later hired to tutor — plus several sets of Höhere Mathematik worked through programmatically.
+          </p>
+          <ul class="chips"><li>C++</li><li>Algorithms</li><li>OOP</li><li>Numerical methods</li></ul>
+          <div class="links">
+            <a class="link-out" href="https://github.com/Alibosnina/GIP_Prak" target="_blank" rel="noopener">GIP-Prak &nearr;</a>
+            <a class="link-out" href="https://github.com/Alibosnina/HOMA2" target="_blank" rel="noopener">HOMA2 &nearr;</a>
+          </div>
+        </div>
+      </article>
+
+      <div class="also">
+        <span class="lab">Also built</span>
+        <ul class="also-list">
+          <li>E-Visa — visa application system</li>
+          <li>Masar — product design build</li>
+          <li>Sparky — cloud app</li>
+          <li>Darahim Loyalty — Prisma + NestJS</li>
+          <li>Alborki — showers catalogue</li>
+          <li>English academy sites</li>
+          <li>Dentistry dashboard</li>
+          <li>Developer portal — FH Aachen</li>
+          <li>PHP / Laravel &amp; Vue.js work</li>
+          <li>PostgreSQL &amp; MariaDB projects</li>
+          <li>Prolog logic programming</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="sec" id="experience">
+      <div class="sec-head">
+        <h2>Experience</h2>
+        <span class="lab num">2017 &mdash; 2026</span>
+      </div>
+
+      <article class="entry">
+        <div class="entry-meta"><span class="entry-date num">2025 &ndash; Mar 2026</span></div>
+        <div class="entry-body">
+          <h3 class="entry-title">Working student, software development</h3>
+          <p class="entry-sub">Snacc-it GmbH</p>
+          <ul class="bullets">
+            <li>Designed and built the complete company website independently — from architecture through to going live.</li>
+            <li>Developed full-stack applications with Next.js on the front end and NestJS on the back end.</li>
+            <li>Configured and extended ServiceNow solutions for enterprise clients.</li>
+            <li>Contributed to analysis, implementation and testing of client requirements in an agile environment.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta"><span class="entry-date num">2024 &ndash; 2025</span></div>
+        <div class="entry-body">
+          <h3 class="entry-title">Tutor, Intro to CS &amp; Higher Programming Languages</h3>
+          <p class="entry-sub">Fachhochschule Aachen</p>
+          <ul class="bullets">
+            <li>Supported students through Grundlagen der Informatik and Höhere Programmiersprachen.</li>
+            <li>Reviewed and graded code submissions to keep students&rsquo; progress on track.</li>
+            <li>Explained complex technical material to students arriving with very different backgrounds.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta"><span class="entry-date num">2020 &ndash; 2022</span></div>
+        <div class="entry-body">
+          <h3 class="entry-title">IT administrator</h3>
+          <p class="entry-sub">MSB Ltd.</p>
+          <ul class="bullets">
+            <li>User support, network monitoring and assistance with server setup.</li>
+            <li>Maintained the company website and handled general IT operations.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta"><span class="entry-date num">Jun 2017 &ndash; Mar 2020</span></div>
+        <div class="entry-body">
+          <h3 class="entry-title">Sales, ticket booking</h3>
+          <p class="entry-sub">Barnio for Travel</p>
+          <ul class="bullets">
+            <li>Advised customers and sold flight tickets through the Amadeus reservation system.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ EDUCATION ============ -->
+    <section class="sec" id="education">
+      <div class="sec-head">
+        <h2>Education</h2>
+        <span class="lab">Degree &amp; school</span>
+      </div>
+
+      <article class="entry">
+        <div class="entry-meta"><span class="entry-date num">2023 &ndash; present</span></div>
+        <div class="entry-body">
+          <h3 class="entry-title">B.Sc. Informatik</h3>
+          <p class="entry-sub">FH Aachen &middot; University of Applied Sciences</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-meta"><span class="entry-date num">2019 &ndash; 2020</span></div>
+        <div class="entry-body">
+          <h3 class="entry-title">Abitur &mdash; final grade 1.0</h3>
+          <p class="entry-sub">Hadaiq Babel</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ TOOLKIT ============ -->
+    <section class="sec" id="toolkit">
+      <div class="sec-head">
+        <h2>Toolkit</h2>
+        <span class="lab">What I work with</span>
+      </div>
+
+      <div class="kit">
+        <div class="kit-col">
+          <span class="lab">Languages</span>
+          <ul>
+            <li>TypeScript &amp; JavaScript</li><li>Python</li><li>Java</li>
+            <li>C++</li><li>PHP</li><li>SQL</li><li>Prolog</li>
+          </ul>
+        </div>
+        <div class="kit-col">
+          <span class="lab">Front end</span>
+          <ul>
+            <li>React</li><li>Next.js (App Router)</li><li>Vue.js</li><li>Vite</li>
+            <li>Tailwind CSS</li><li>Radix &middot; shadcn/ui &middot; MUI</li>
+            <li>GSAP &middot; Framer Motion</li><li>i18n with RTL</li>
+          </ul>
+        </div>
+        <div class="kit-col">
+          <span class="lab">Back end</span>
+          <ul>
+            <li>NestJS</li><li>Node.js</li><li>Laravel</li>
+            <li>REST APIs</li><li>OAuth 2.0 &middot; Keycloak</li><li>FHIR &middot; Medplum</li>
+          </ul>
+        </div>
+        <div class="kit-col">
+          <span class="lab">Data</span>
+          <ul>
+            <li>PostgreSQL</li><li>MariaDB</li><li>Prisma</li>
+            <li>TypeORM</li><li>Redis</li><li>Supabase</li>
+          </ul>
+        </div>
+        <div class="kit-col">
+          <span class="lab">Platform &amp; delivery</span>
+          <ul>
+            <li>Docker &amp; Compose</li><li>Kubernetes</li><li>Caddy &middot; Nginx</li>
+            <li>VPS deployment</li><li>GitHub Actions</li><li>Vercel</li>
+            <li>Git &amp; GitHub</li><li>ServiceNow</li>
+          </ul>
+        </div>
+        <div class="kit-col">
+          <span class="lab">Ways of working</span>
+          <ul>
+            <li>Monorepo architecture</li><li>Permission modelling</li>
+            <li>Written specifications</li><li>Agile delivery</li>
+            <li>Teaching &amp; code review</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="sec" id="contact">
+      <div class="sec-head">
+        <h2>Contact</h2>
+        <span class="lab">Scan, tap or write</span>
+      </div>
+
+      <div class="contact">
+        <div>
+          <p class="prose" style="margin-bottom:22px">
+            I&rsquo;m available now for working-student positions, internships and junior full-stack roles in
+            and around Aachen, or remote. The quickest way to reach me is email.
+          </p>
+          <div class="rows">
+            <div class="row">
+              <span class="lab">Email</span>
+              <a href="mailto:alibusneina@gmail.com">alibusneina@gmail.com</a>
+            </div>
+            <div class="row">
+              <span class="lab">Phone</span>
+              <a href="tel:+4917670062702" class="num">+49 176 70062702</a>
+            </div>
+            <div class="row">
+              <span class="lab">GitHub</span>
+              <a href="https://github.com/Alibosnina" target="_blank" rel="noopener">github.com/Alibosnina</a>
+            </div>
+            <div class="row">
+              <span class="lab">LinkedIn</span>
+              <span class="val" style="color:var(--ink-3)">linkedin.com/in/&hellip;
+                <span class="todo">&nbsp;&nbsp;(profile URL to be added)</span>
+              </span>
+            </div>
+            <div class="row">
+              <span class="lab">Location</span>
+              <span class="val">Aachen, North Rhine-Westphalia, Germany</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="qr-card">
+          <div class="qr-frame">
+            <!-- QR:START -->
+            <svg viewBox="0 0 35 35" role="img" aria-label="QR code that opens alibosnina.github.io" shape-rendering="crispEdges"><rect width="35" height="35" fill="#FFFFFF"/><path d="M3 3h7v1h-7zM11 3h2v1h-2zM17 3h1v1h-1zM20 3h4v1h-4zM25 3h7v1h-7zM3 4h1v1h-1zM9 4h1v1h-1zM12 4h2v1h-2zM15 4h3v1h-3zM19 4h1v1h-1zM21 4h1v1h-1zM23 4h1v1h-1zM25 4h1v1h-1zM31 4h1v1h-1zM3 5h1v1h-1zM5 5h3v1h-3zM9 5h1v1h-1zM15 5h1v1h-1zM17 5h3v1h-3zM25 5h1v1h-1zM27 5h3v1h-3zM31 5h1v1h-1zM3 6h1v1h-1zM5 6h3v1h-3zM9 6h1v1h-1zM16 6h3v1h-3zM20 6h1v1h-1zM22 6h1v1h-1zM25 6h1v1h-1zM27 6h3v1h-3zM31 6h1v1h-1zM3 7h1v1h-1zM5 7h3v1h-3zM9 7h1v1h-1zM11 7h3v1h-3zM15 7h1v1h-1zM17 7h2v1h-2zM20 7h4v1h-4zM25 7h1v1h-1zM27 7h3v1h-3zM31 7h1v1h-1zM3 8h1v1h-1zM9 8h1v1h-1zM11 8h1v1h-1zM13 8h2v1h-2zM16 8h1v1h-1zM19 8h2v1h-2zM25 8h1v1h-1zM31 8h1v1h-1zM3 9h7v1h-7zM11 9h1v1h-1zM13 9h1v1h-1zM15 9h1v1h-1zM17 9h1v1h-1zM19 9h1v1h-1zM21 9h1v1h-1zM23 9h1v1h-1zM25 9h7v1h-7zM12 10h1v1h-1zM15 10h2v1h-2zM19 10h1v1h-1zM23 10h1v1h-1zM4 11h7v1h-7zM13 11h1v1h-1zM15 11h2v1h-2zM18 11h5v1h-5zM26 11h2v1h-2zM31 11h1v1h-1zM5 12h4v1h-4zM14 12h1v1h-1zM21 12h7v1h-7zM31 12h1v1h-1zM3 13h1v1h-1zM7 13h1v1h-1zM9 13h4v1h-4zM14 13h1v1h-1zM16 13h1v1h-1zM19 13h3v1h-3zM24 13h2v1h-2zM27 13h2v1h-2zM4 14h1v1h-1zM6 14h2v1h-2zM13 14h1v1h-1zM15 14h4v1h-4zM21 14h7v1h-7zM30 14h1v1h-1zM3 15h2v1h-2zM7 15h7v1h-7zM15 15h1v1h-1zM19 15h2v1h-2zM22 15h1v1h-1zM24 15h1v1h-1zM26 15h1v1h-1zM29 15h3v1h-3zM4 16h5v1h-5zM11 16h1v1h-1zM13 16h1v1h-1zM17 16h1v1h-1zM19 16h7v1h-7zM27 16h2v1h-2zM30 16h2v1h-2zM6 17h1v1h-1zM8 17h2v1h-2zM12 17h1v1h-1zM14 17h3v1h-3zM18 17h3v1h-3zM23 17h4v1h-4zM3 18h1v1h-1zM6 18h1v1h-1zM15 18h2v1h-2zM19 18h1v1h-1zM24 18h1v1h-1zM27 18h2v1h-2zM30 18h2v1h-2zM5 19h3v1h-3zM9 19h4v1h-4zM16 19h1v1h-1zM19 19h1v1h-1zM21 19h1v1h-1zM26 19h1v1h-1zM28 19h2v1h-2zM31 19h1v1h-1zM3 20h1v1h-1zM6 20h2v1h-2zM11 20h5v1h-5zM18 20h1v1h-1zM20 20h3v1h-3zM25 20h7v1h-7zM3 21h1v1h-1zM8 21h4v1h-4zM14 21h1v1h-1zM16 21h1v1h-1zM18 21h3v1h-3zM25 21h3v1h-3zM29 21h1v1h-1zM3 22h1v1h-1zM6 22h3v1h-3zM10 22h2v1h-2zM14 22h1v1h-1zM16 22h1v1h-1zM18 22h1v1h-1zM22 22h1v1h-1zM25 22h1v1h-1zM28 22h1v1h-1zM3 23h1v1h-1zM7 23h1v1h-1zM9 23h2v1h-2zM13 23h1v1h-1zM17 23h2v1h-2zM20 23h1v1h-1zM23 23h5v1h-5zM29 23h1v1h-1zM31 23h1v1h-1zM11 24h5v1h-5zM19 24h1v1h-1zM23 24h1v1h-1zM27 24h2v1h-2zM30 24h2v1h-2zM3 25h7v1h-7zM11 25h1v1h-1zM13 25h1v1h-1zM15 25h4v1h-4zM21 25h3v1h-3zM25 25h1v1h-1zM27 25h1v1h-1zM3 26h1v1h-1zM9 26h1v1h-1zM11 26h3v1h-3zM15 26h1v1h-1zM17 26h1v1h-1zM19 26h1v1h-1zM21 26h3v1h-3zM27 26h2v1h-2zM3 27h1v1h-1zM5 27h3v1h-3zM9 27h1v1h-1zM11 27h1v1h-1zM14 27h1v1h-1zM21 27h1v1h-1zM23 27h9v1h-9zM3 28h1v1h-1zM5 28h3v1h-3zM9 28h1v1h-1zM11 28h1v1h-1zM18 28h2v1h-2zM21 28h4v1h-4zM26 28h1v1h-1zM28 28h1v1h-1zM3 29h1v1h-1zM5 29h3v1h-3zM9 29h1v1h-1zM11 29h3v1h-3zM16 29h2v1h-2zM20 29h11v1h-11zM3 30h1v1h-1zM9 30h1v1h-1zM11 30h2v1h-2zM15 30h2v1h-2zM19 30h1v1h-1zM23 30h1v1h-1zM27 30h2v1h-2zM30 30h1v1h-1zM3 31h7v1h-7zM13 31h1v1h-1zM15 31h3v1h-3zM20 31h1v1h-1zM22 31h1v1h-1zM27 31h1v1h-1zM29 31h1v1h-1z" fill="#15181A"/></svg>
+            <!-- QR:END -->
+          </div>
+          <div class="qr-meta">
+            <span class="qr-name">Ali Busneina</span>
+            <span class="qr-sub">Full-stack developer &middot; Aachen</span>
+            <span class="qr-url" id="qrUrl">alibosnina.github.io</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span class="lab">Ali Busneina &middot; Aachen, Germany</span>
+      <span class="lab num">Last updated September 2026</span>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+(function () {
+  var btn = document.getElementById('themeBtn');
+  if (!btn) return;
+  var root = document.documentElement;
+  var stored = null;
+  try { stored = localStorage.getItem('ab-theme'); } catch (e) {}
+  if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
+
+  btn.addEventListener('click', function () {
+    var current = root.getAttribute('data-theme');
+    var isDark;
+    if (current) {
+      isDark = current === 'dark';
+    } else {
+      isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    var next = isDark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('ab-theme', next); } catch (e) {}
+  });
+})();
+</script>
+
+</body>
 </html>
